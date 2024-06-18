@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        td.orange {
+            background-color: orange;
+        }
+    </style>
+    <script>
+        function generateRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function generateRandomArray(length) {
+            const randomArray = [];
+            for (let i = 0; i < length; i++) {
+                randomArray.push(generateRandomNumber(0, 99));
+            }
+            return randomArray;
+        }
+
+        function createTable(array) {
+            const table = document.createElement('table');
+            for (let i = 0; i < 5; i++) {
+                const row = table.insertRow();
+                for (let j = 0; j < 6; j++) {
+                    const cell = row.insertCell();
+                    const randomNumber = array[i * 6 + j];
+                    cell.textContent = randomNumber;
+                    if (randomNumber >= 50) {
+                        cell.classList.add('orange');
+                    }
+                }
+            }
+            document.body.appendChild(table);
+        }
+
+        function addRandomNumberToTable() {
+            const table = document.querySelector('table');
+            const row = table.insertRow();
+            const cell = row.insertCell();
+            const randomNumber = generateRandomNumber(0, 99);
+            cell.textContent = randomNumber;
+            if (randomNumber >= 50) {
+                cell.classList.add('orange');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<button onclick="addRandomNumberToTable()">Добавить число</button>
+
+<script>
+    const randomArray = generateRandomArray(30);
+    createTable(randomArray);
+</script>
+
+</body>
+</html>
